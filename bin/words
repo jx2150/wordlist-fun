@@ -1,0 +1,52 @@
+var stream = require('stream')
+var liner = new stream.Transform( { objectMode: true } )
+var fs = require('fs');
+var source = fs.createReadStream('/usr/share/dict/words');
+var wordsObj = {'a': [],'b': [],'c': [],'d': [],'e': [],'f': [],'g': [],'h': [],'i': [],'j': [],'k': [],'l': [],'m': [],'n': [],'o': [],'p': [],'q': [],'r': [],'s': [],'t': [],'u': [],'v': [],'w': [],'x': [],'y': [],'z': []};
+
+module.exports = function(app) {
+  liner._transform = function (chunk, encoding, done) {
+       var data = chunk.toString()
+       if (this._lastLineData) data = this._lastLineData + data
+   
+       var lines = data.split('\n')
+       this._lastLineData = lines.splice(lines.length-1,1)[0]
+   
+       lines.forEach(this.push.bind(this))
+       done()
+  }
+   
+  liner._flush = function (done) {
+       if (this._lastLineData) this.push(this._lastLineData)
+       this._lastLineData = null
+       done()
+  }
+
+  source.pipe(liner)
+
+  liner.on('readable', function () {
+    var line;
+    var firstLetter;
+    while (line = liner.read()) {
+      firstLetter = line.charAt(0).toLowerCase();
+      wordsObj[firstLetter].push({
+        match: 0,
+        string: line
+      });
+    }
+  });
+
+  liner.on('end', function () {
+    // console.log(wordsObj)
+    app.locals['words'] = JSON.stringify(wordsObj);
+
+    fs.writeFile("public/words.json", JSON.stringify(wordsObj), function(err) {
+      if(err) {
+        return console.log(err);
+      }
+
+      console.log("Saved word list to /public/words.json");
+    }); 
+
+  });
+}

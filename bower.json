@@ -1,0 +1,20 @@
+{
+  "name": "words",
+  "version": "0.1.0",
+  "authors": [
+    "Jack Bishop <hello@jbi.sh>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libraries/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass-official": "~3.3.4",
+    "react-list": "~0.2.10"
+  }
+}
