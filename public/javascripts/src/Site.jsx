@@ -11,7 +11,7 @@ module.exports = React.createClass({
 	    	<form className="form-inline">
 			  <div className="form-group">
 			    <div className="input-group">
-			      <input ref="siteUrl" type="text" className="form-control" placeholder="URL"/>
+			      <input ref="siteUrl" type="text" className="form-control" placeholder="URL" defaultValue="http://en.wikipedia.org/wiki/Sonic_the_Hedgehog_(series)"/>
 			    </div>
 			  </div>
 			  <button type="submit" className="btn btn-primary" onClick={this.props.handleUrlSubmit}>Fetch</button>

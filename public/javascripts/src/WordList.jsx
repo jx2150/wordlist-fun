@@ -45,7 +45,7 @@ module.exports = React.createClass({
 	    		}
 		    	<div className="list">
 		    		{
-						this.props.words[this.props.selectedLetter].map(function(item, i) {
+						this.props.words.map(function(item, i) {
 							return (
 								<div 
 									onClick={this.handleClick.bind(this, i)} 

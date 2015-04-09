@@ -20,10 +20,10 @@ var App = React.createClass({
 			fullData: '',
 			renderUrl: '',
 			renderImagePath: '',
-			words: words,
+			words: words['a'],
 			loading: false,
 			error: false,
-			wordsUniqueToSite: { a: [] }
+			wordsUniqueToSite: []
 		}
 	},
 
@@ -100,9 +100,9 @@ var App = React.createClass({
 			return b.match - a.match
 		});
 
-		data.words = words;
-		data.wordsUniqueToSite = this.getTermsUniqueToSite(termsFromSite, data.freqterms);
-		data.words[this.state.selectedLetter] = sortedWords;
+		// data.words = words;
+		data.wordsUniqueToSite = this.getTermsUniqueToSite.call(this, termsFromSite, data.freqterms);
+		data.words = sortedWords;
 		data.loading = false;
 		data.error = false;
 
@@ -113,29 +113,30 @@ var App = React.createClass({
   	getTermsUniqueToSite: function(termsFromSite, countHash) {
   		var self = this;
   		var termsUniqueToSite = termsFromSite;
-  		var wordLetterArray = Object.keys(self.state.words);
+  		var wordSet = self.state.words;
   		var firstLetter;
-  		var returnObj = wordsObj;
+  		// var returnObj = wordsObj;
+  		var returnObj = [];
 
   		termsUniqueToSite = termsUniqueToSite.sort(function(a, b) {
-  			console.log(b.match, a.match);
-			return b.match - a.match
+			return countHash[b] - countHash[a]
 		});
   		
-  		wordLetterArray.forEach(function(letter) {
-  			var wordSet = self.state.words[letter];
+  		// wordLetterArray.forEach(function(letter) {
+  		// 	var wordSet = self.state.words[letter];
 	  		wordSet.forEach(function(word){
-	  			var wordString = word.string.toString();
+	  			var wordString = word.string.toLowerCase();
 	  			if (countHash[wordString]) {
 	  				termsUniqueToSite.splice(termsUniqueToSite.indexOf(wordString), 1);
 	  			}
 	  		});
-  		});
+  		// });
 
   		termsUniqueToSite.forEach(function(word) {
   			firstLetter = word.charAt(0).toLowerCase();
-  			if (firstLetter.length === 1 && firstLetter.match(/[a-z]/i)) {
-	  			returnObj[firstLetter].push({
+  			if (firstLetter.length === 1 && firstLetter.match(/[a-z]/i) && firstLetter === self.state.selectedLetter) {
+	  			// returnObj[firstLetter].push({
+	  			returnObj.push({
 	  				className: "unmatch unmatch-"+countHash[word],
 					match: countHash[word],
 					string: word

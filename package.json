@@ -16,11 +16,14 @@
     "lodash": "^3.6.0",
     "morgan": "~1.5.1",
     "oboe": "^2.1.1",
+    "phantom": "^0.7.2",
+    "phantomjs": "^1.9.16",
     "react-infinite": "^0.3.4",
     "react-infinity": "^1.2.2",
     "react-lazy-render": "^0.2.1",
     "serve-favicon": "~2.2.0",
-    "slug": "^0.8.0"
+    "slug": "^0.8.0",
+    "text-miner": "^0.2.0"
   },
   "devDependencies": {
     "browserify": "^9.0.3",

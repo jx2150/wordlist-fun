@@ -4908,6 +4908,11 @@ body {
   margin: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
+.container {
+  width: 90%;
+  padding: 0;
+  margin: 0 auto; }
+
 a {
   color: #00B7FF; }
 
@@ -4917,7 +4922,8 @@ a {
 
 .list, .unique-list {
   width: 50%;
-  float: left; }
+  float: left;
+  margin: 20px 0 0; }
 
 #wordlist div[data-match] {
   display: none;

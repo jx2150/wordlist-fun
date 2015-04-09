@@ -23,7 +23,7 @@ module.exports = React.createClass({
 	    	<div className="list unique-list">
 		    	<div>
 		    		{
-						this.props.wordsUniqueToSite[this.props.selectedLetter].map(function(item, i) {
+						this.props.wordsUniqueToSite.map(function(item, i) {
 							return (
 								<div 
 									onClick={this.handleClick.bind(this, i)} 
