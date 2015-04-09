@@ -1,2 +1,2 @@
-# node-express-react-data-stream
-Demo of node + express + react + streaming data.
+# node-express-react-wordlist
+Demo of node + express + react + /usr/share/dict/words
